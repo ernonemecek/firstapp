@@ -1,0 +1,45 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+
+class MyBoxLayout(BoxLayout):
+    def hesaplama(self, donum):
+        verim = float((donum * 750) + (donum * 800) + (donum * 600)) / 3
+        surgun = verim * 3
+        fiyat = (19 * 0.7) + (15 * 0.3)
+        toplam = surgun * fiyat
+        return surgun, toplam
+
+    def on_button_press(self, instance):
+        try:
+            donum = float(self.donum_input.text)
+            surgun, toplam = self.hesaplama(donum)
+
+            self.surgun_label.text = f"Tahmini yıllık çay veriminiz: {surgun:.2f} kg"
+            self.kazanc_label.text = f"Tahmini yıllık kazancınız: {int(toplam)} TL"
+        except ValueError:
+            self.surgun_label.text = "Lütfen geçerli bir dönüm miktarı giriniz."
+            self.kazanc_label.text = ""
+
+class MyApp(App):
+    def build(self):
+        layout = MyBoxLayout(orientation='vertical')
+        
+        layout.donum_input = TextInput(hint_text='Sahip olduğunuz çay dönüm miktarını giriniz', multiline=False)
+        layout.surgun_label = Label(text="")
+        layout.kazanc_label = Label(text="")
+        button = Button(text='Hesapla')
+
+        button.bind(on_press=layout.on_button_press)
+
+        layout.add_widget(layout.donum_input)
+        layout.add_widget(button)
+        layout.add_widget(layout.surgun_label)
+        layout.add_widget(layout.kazanc_label)
+
+        return layout
+
+if __name__ == "__main__":
+    MyApp().run()
