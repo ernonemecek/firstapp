@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Uygulaması</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="tabs">
+    <button id="testTab" class="active">Test Et</button>
+    <button id="dragTab">Sürükle Bırak</button>
+  </div>
+
+  <div id="testContainer" class="container active">
+    <div id="question"></div>
+    <div id="options"></div>
+    <button id="nextBtn" disabled>Sonraki</button>
+  </div>
+
+  <div id="dragContainer" class="container">
+    <div class="drag-area">
+      <div id="trList" class="list"></div>
+      <div id="enList" class="list"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
